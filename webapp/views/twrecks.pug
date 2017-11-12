@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Point your webcam at a license plate to see some cool graphics! Welcome to #{title}
+  iframe(type='text/html' width='640' height='390'
+    src='https://portal.hdontap.com/s/embed?stream=streamname'
+    frameborder='20' allowfullscreen)
