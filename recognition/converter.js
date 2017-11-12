@@ -16,19 +16,29 @@ var opts = {
     'prewarp': "" // {String} Prewarp configuration is used to calibrate the analyses for the  angle of a particular camera.  More information is available here http://doc.openalpr.com/accuracy_improvements.html#calibration
 };
 
-var callback = function(error, data, response) {
-    if (error) {
-        console.error(error);
-    } else {
-        console.log('API called successfully. Returned data: ' + data);
-        if (data.results.length == 0) {
-            console.error("No results");
-        } else {
-            console.log(data.results[0].region);
-            console.log(data.results[0].plate);
-            console.log(data.results[0].coordinates);
-        }
-    }
-};
 
-api.recognizeBytes(exportedImage, secretKey, country, opts, callback);
+
+var finaldata;
+
+function doCall(callback) {
+    api.recognizeBytes(exportedImage, secretKey, country, opts, function(error, data, response) {
+        if (error) {
+            console.error(error);
+        } else {
+            console.log('API called successfully. Returned data: ' + data);
+            if (data.results.length == 0) {
+                console.error("No results");
+            } else {
+                result = data.results[0];
+                plate_region = data.results[0].region;
+                plate_no = data.results[0].plate;
+                plate_coord = data.results[0].coordinates;
+                return callback(result);
+            }
+        }
+    });
+}
+
+doCall (function(data) {
+    console.log(data);
+})
