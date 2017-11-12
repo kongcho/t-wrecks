@@ -2,17 +2,6 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/main.css')
-    script(src='/stylesheets/js/main.js')
-    script(src='/stylesheets/js/lib/ga.js')
-    style.
-      video {
-      object-fit: cover;
-      }
-      @media (min-width: 1000px) {
-      video {
-      height: 480px;
-      }
-      }
+    include index.html
   body
     block content
